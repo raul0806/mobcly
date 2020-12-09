@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "895993850431",
+    "project_id": "mobcly",
+    "storage_bucket": "mobcly.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895993850431:android:206dbc23e40ac19781e68a",
+        "android_client_info": {
+          "package_name": "es.ujaen.rma00035.mobcly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "895993850431-3aevsoir86lggc4tv0aln94lphb8ui79.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_xHO_eAmmTUOeHcsUx_Oy1NnXspfU7-k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "895993850431-3aevsoir86lggc4tv0aln94lphb8ui79.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
