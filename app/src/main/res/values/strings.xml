@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Mobcly</string>
+    <string name="prefs_file">es.ujaen.rma00035.mobcly.PREFERENCE_FILE_KEY</string>
 </resources>
