@@ -39,6 +39,7 @@ class HomeActivity : AppCompatActivity() {
             val prefs =
                 getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
             prefs.clear()
+            prefs.apply()
             FirebaseAuth.getInstance().signOut()
             val authIntent = Intent(this,AuthActivity::class.java)
            authIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
