@@ -14,10 +14,12 @@ class MainActivity : AppCompatActivity() {
         setup()
         session()
     }
+
     override fun onStart() {
         super.onStart()
         initLayout.visibility = View.VISIBLE
     }
+
     private fun setup() {
         buttonProfilePadre.setOnClickListener {
             val homeIntent = Intent(this, AuthActivity::class.java).apply {
@@ -33,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
     private fun session() {
         val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
         val email = prefs.getString("email", null)
@@ -45,9 +48,10 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun showHome(email: String) {
-        val homeIntent = Intent(this,HomeActivity::class.java).apply {
-            putExtra("email",email)
+        val homeIntent = Intent(this, HomeActivity::class.java).apply {
+            putExtra("email", email)
         }
+        homeIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(homeIntent)
     }
 }
