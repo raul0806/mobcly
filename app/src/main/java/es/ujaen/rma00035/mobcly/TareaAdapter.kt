@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import es.ujaen.rma00035.mobcly.models.Tareas
 import kotlinx.android.synthetic.main.recycler_view_item.view.*
+import java.text.SimpleDateFormat
 
 class TareaAdapter(val tareaLista: List<Tareas>) :
     RecyclerView.Adapter<TareaAdapter.TareaHolder>() {
@@ -24,7 +25,7 @@ class TareaAdapter(val tareaLista: List<Tareas>) :
 
     class TareaHolder(val view: View) : RecyclerView.ViewHolder(view) {
         fun render(t: Tareas) {
-            view.hourTextView.text = t.hour.toString()
+            view.hourTextView.text = SimpleDateFormat("HH:mm").format(t.date)
             view.nameTextView.text = t.name
             //view.imageView=
         }
