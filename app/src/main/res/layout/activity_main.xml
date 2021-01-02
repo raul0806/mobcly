@@ -2,17 +2,39 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/initLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/buttonProfilePadre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_weight="1"
+        android:text="Padre"
+        app:layout_constraintBaseline_toBaselineOf="@+id/buttonProfileHijo"
+        app:layout_constraintStart_toStartOf="@+id/textoInicio" />
+
+    <Button
+        android:id="@+id/buttonProfileHijo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_weight="1"
+        android:text="Hijo"
+        app:layout_constraintEnd_toEndOf="@+id/textoInicio"
+        app:layout_constraintTop_toBottomOf="@+id/textoInicio" />
+
+    <TextView
+        android:id="@+id/textoInicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="214dp"
+        android:foregroundGravity="center_vertical"
+        android:text="Elije el tipo de perfil que vas a usar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

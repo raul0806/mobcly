@@ -35,7 +35,7 @@ class AuthActivity : AppCompatActivity() {
         val provider = prefs.getString("provider", "None")
         if (email != null && provider != null) {
             authLayout.visibility = View.INVISIBLE
-            showHome()
+            showHome(email)
         }
     }
 
@@ -48,7 +48,7 @@ class AuthActivity : AppCompatActivity() {
                     editTextPassword.text.toString()
                 ).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        showHome()
+                        showHome(it.result?.user?.email?:"")
                     } else {
                         showAlert()
                     }
@@ -62,7 +62,7 @@ class AuthActivity : AppCompatActivity() {
                     editTextPassword.text.toString()
                 ).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        showHome()
+                        showHome(it.result?.user?.email?:"")
                     } else {
                         showAlert()
                     }
@@ -89,9 +89,9 @@ class AuthActivity : AppCompatActivity() {
         dialog.show()//minuto 11
     }
 
-    private fun showHome() {
-        val homeIntent = Intent(this, HomeActivity::class.java).apply {
-            //putExtra("clave",valor)
+    private fun showHome(email:String) {
+        val homeIntent = Intent(this,HomeActivity::class.java).apply {
+            putExtra("email",email)
         }
         startActivity(homeIntent)
     }
@@ -107,7 +107,7 @@ class AuthActivity : AppCompatActivity() {
                 FirebaseAuth.getInstance().signInWithCredential(credential)
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
-                            showHome()
+                            showHome(account.email?:"")
                         } else {
                             showAlert()
                         }
