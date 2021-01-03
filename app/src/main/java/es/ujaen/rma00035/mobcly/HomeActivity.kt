@@ -1,9 +1,11 @@
 package es.ujaen.rma00035.mobcly
 
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Window
 import android.widget.ImageView
 import androidmads.library.qrgenearator.QRGContents
 import androidmads.library.qrgenearator.QRGEncoder
@@ -38,7 +40,6 @@ class HomeActivity : AppCompatActivity() {
         prefs.putString("email", email)
         prefs.putString("tipo", tipo)
         prefs.apply()
-        db.setValue(email)
 
     }
 
@@ -57,11 +58,18 @@ class HomeActivity : AppCompatActivity() {
         }
         if (tipo == "padre") {
             addHijo.setOnClickListener {
-                val qrEncoder = QRGEncoder("email", null, QRGContents.Type.TEXT, 100)
+                val prefs =
+                    getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+                val email = prefs.getString("email",null)
+                val qrEncoder = QRGEncoder("email:$email", null, QRGContents.Type.TEXT, 500)
                 val bitmap = qrEncoder.encodeAsBitmap()
                 //qrImage.setImageBitmap(bitmap)
                 val m = ImageView(this)
                 m.setImageBitmap(bitmap)
+                val dialog = Dialog(this)
+                dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
+                dialog.window?.setContentView(m)
+                dialog.show()
 
             }
         }
@@ -75,17 +83,5 @@ class HomeActivity : AppCompatActivity() {
         val adapter = ActionsAdapter(lista)
         recyclerViewAction.adapter = adapter
     }
-
-    fun notification() {
-        FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
-            it.result?.token?.let {
-                db.child("users").child(it).setValue("Hola")
-            }
-        }
-        FirebaseMessaging.getInstance().subscribeToTopic("id12345")
-
-        val qrEncoder = QRGEncoder("email", null, QRGContents.Type.TEXT, 100)
-        val bitmap = qrEncoder.encodeAsBitmap()
-        //qrImage.setImageBitmap(bitmap)
-    }
+    
 }
