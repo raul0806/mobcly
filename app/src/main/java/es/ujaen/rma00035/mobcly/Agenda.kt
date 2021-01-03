@@ -58,7 +58,7 @@ class Agenda : AppCompatActivity() {
         email?.replace(".", ",")
             ?.let { db.child(it).child("Agenda").addValueEventListener(postListener) }
         recyclerViewTarea.layoutManager = LinearLayoutManager(this)
-        //tareas = mutableListOf()
+        tareas = mutableListOf()
         /*
         val prefs =
             getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
