@@ -60,7 +60,7 @@ class HomeActivity : AppCompatActivity() {
             addHijo.setOnClickListener {
                 val prefs =
                     getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-                val email = prefs.getString("email",null)
+                val email = prefs.getString("email", null)
                 val qrEncoder = QRGEncoder("email:$email", null, QRGContents.Type.TEXT, 500)
                 val bitmap = qrEncoder.encodeAsBitmap()
                 //qrImage.setImageBitmap(bitmap)
@@ -83,5 +83,5 @@ class HomeActivity : AppCompatActivity() {
         val adapter = ActionsAdapter(lista)
         recyclerViewAction.adapter = adapter
     }
-    
+
 }

@@ -2,18 +2,22 @@ package es.ujaen.rma00035.mobcly
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.format.DateFormat.is24HourFormat
 import android.util.Log
 import android.view.View
 import com.google.firebase.crashlytics.internal.common.CommonUtils.hideKeyboard
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import es.ujaen.rma00035.mobcly.models.Tareas
 import kotlinx.android.synthetic.main.activity_add_tarea.*
 import java.util.*
 
 class AddTarea : AppCompatActivity() {
-    val LOG_TAG = "MAINACTIVITY CLASS"
+    private val db = Firebase.database.reference
+    val LOG_TAG = "AddTarea CLASS"
     var dia = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
     var mes = Calendar.getInstance().get(Calendar.MONTH) // OJO: De 0 a 11
     var anio = Calendar.getInstance().get(Calendar.YEAR)
@@ -37,8 +41,19 @@ class AddTarea : AppCompatActivity() {
             ) {
                 val cal = Calendar.getInstance()
                 cal.set(anio, mes, dia, hora, minuto)
-                Tareas(editTextTitle.text.toString(), "", cal.time)
-                //TODO save
+                val tarea = Tareas(editTextTitle.text.toString(), "", cal.time)
+                val prefs =
+                    getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+                val email = prefs.getString("email", "none")
+                val key =
+                    email?.let { it1 -> db.child(it1.replace(".", ",")).child("Agenda").push().key }
+                email?.let { it1 ->
+                    key?.let { it2 ->
+                        db.child(it1.replace(".", ",")).child("Agenda").child(
+                            it2
+                        ).setValue(tarea)
+                    }
+                }
                 onBackPressed()
             }
         }
