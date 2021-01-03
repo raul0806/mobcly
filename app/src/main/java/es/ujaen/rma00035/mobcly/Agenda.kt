@@ -6,7 +6,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import es.ujaen.rma00035.mobcly.models.Tareas
-import kotlinx.android.synthetic.main.content_agenda.*
+import kotlinx.android.synthetic.main.recycler_view_agenda.*
 import java.util.Date
 
 

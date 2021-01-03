@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import es.ujaen.rma00035.mobcly.models.Tareas
-import kotlinx.android.synthetic.main.recycler_view_item.view.*
+import kotlinx.android.synthetic.main.recycler_view_itemagenda.view.*
 import java.text.SimpleDateFormat
 
 class TareaAdapter(val tareaLista: List<Tareas>) :
@@ -13,7 +13,7 @@ class TareaAdapter(val tareaLista: List<Tareas>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TareaHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return TareaHolder(layoutInflater.inflate(R.layout.recycler_view_itemAgenda, parent, false))
+        return TareaHolder(layoutInflater.inflate(R.layout.recycler_view_itemagenda, parent, false))
     }
 
     override fun onBindViewHolder(holder: TareaHolder, position: Int) {

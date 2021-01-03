@@ -16,5 +16,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/recycler_view_itemAgenda" />
+        tools:listitem="@layout/recycler_view_itemagenda" />
 </androidx.constraintlayout.widget.ConstraintLayout>
