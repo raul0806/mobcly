@@ -2,11 +2,12 @@ package es.ujaen.rma00035.mobcly
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import androidmads.library.qrgenearator.QRGContents
 import androidmads.library.qrgenearator.QRGEncoder
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.FirebaseDatabaseKtxRegistrar
@@ -14,22 +15,31 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
+import es.ujaen.rma00035.mobcly.models.Actions
+import es.ujaen.rma00035.mobcly.models.Tareas
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.recycler_view_actions.*
+import kotlinx.android.synthetic.main.recycler_view_agenda.*
+import java.util.*
 
 class HomeActivity : AppCompatActivity() {
     private val db = Firebase.database.reference
-
+    private lateinit var tipo: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         val bundle = intent.extras
-        val email= bundle?.getString("email")
+        val email = bundle?.getString("email")
+        tipo = bundle?.getString("tipo") ?: "padre"
         setup()
         // Guardado de datos
         val prefs =
             getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
         prefs.putString("email", email)
+        prefs.putString("tipo", tipo)
         prefs.apply()
+        db.setValue(email)
+
     }
 
 
@@ -41,13 +51,32 @@ class HomeActivity : AppCompatActivity() {
             prefs.clear()
             prefs.apply()
             FirebaseAuth.getInstance().signOut()
-            val authIntent = Intent(this,AuthActivity::class.java)
-           authIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            val authIntent = Intent(this, AuthActivity::class.java)
+            authIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(authIntent)
         }
+        if (tipo == "padre") {
+            addHijo.setOnClickListener {
+                val qrEncoder = QRGEncoder("email", null, QRGContents.Type.TEXT, 100)
+                val bitmap = qrEncoder.encodeAsBitmap()
+                //qrImage.setImageBitmap(bitmap)
+                val m = ImageView(this)
+                m.setImageBitmap(bitmap)
+
+            }
+        }
+        recyclerViewAction.layoutManager = LinearLayoutManager(this)
+        val lista: List<Actions> = listOf(
+            Actions("Agenda", ""),
+            Actions("Localizar hijo", ""),
+            Actions("Enviar Localizacion", ""),
+            Actions("Establecer hijo", "")
+        )
+        val adapter = ActionsAdapter(lista)
+        recyclerViewAction.adapter = adapter
     }
 
-    private fun notification() {
+    fun notification() {
         FirebaseInstanceId.getInstance().instanceId.addOnCompleteListener {
             it.result?.token?.let {
                 db.child("users").child(it).setValue("Hola")
