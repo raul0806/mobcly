@@ -31,7 +31,7 @@ class AddTarea : AppCompatActivity() {
             onBackPressed()
         }
         buttonSave.setOnClickListener {
-            if ((editTextTitle.text.isNotEmpty()) and (dateInput.text == getString(R.string.fecha)) and (timeInput.text == getString(
+            if ((editTextTitle.text.isNotEmpty()) and (dateInput.text != getString(R.string.fecha)) and (timeInput.text != getString(
                     R.string.hora
                 ))
             ) {
