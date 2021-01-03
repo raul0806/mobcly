@@ -13,7 +13,7 @@ class TareaAdapter(val tareaLista: List<Tareas>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TareaHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return TareaHolder(layoutInflater.inflate(R.layout.recycler_view_item, parent, false))
+        return TareaHolder(layoutInflater.inflate(R.layout.recycler_view_itemAgenda, parent, false))
     }
 
     override fun onBindViewHolder(holder: TareaHolder, position: Int) {
