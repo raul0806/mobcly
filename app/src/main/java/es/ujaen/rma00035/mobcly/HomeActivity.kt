@@ -46,6 +46,8 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setup() {
         title = "Inicio"
+        Firebase.database.setPersistenceEnabled(true)
+
         logOutButton.setOnClickListener {
             val prefs =
                 getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
@@ -56,11 +58,12 @@ class HomeActivity : AppCompatActivity() {
             authIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(authIntent)
         }
+        val prefs =
+            getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+        val email = prefs.getString("email", null)
         if (tipo == "padre") {
             addHijo.setOnClickListener {
-                val prefs =
-                    getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-                val email = prefs.getString("email", null)
+
                 val qrEncoder = QRGEncoder("email:$email", null, QRGContents.Type.TEXT, 500)
                 val bitmap = qrEncoder.encodeAsBitmap()
                 //qrImage.setImageBitmap(bitmap)
@@ -72,6 +75,9 @@ class HomeActivity : AppCompatActivity() {
                 dialog.show()
 
             }
+           // email?.let { db.child(it).child("solicitarLocalizacion").setValue("False") }
+        }        else{
+          //  email?.let { db.child(it).child("enviarLocalizacion").addOn }
         }
         recyclerViewAction.layoutManager = LinearLayoutManager(this)
         val lista: List<Actions> = listOf(
@@ -80,8 +86,10 @@ class HomeActivity : AppCompatActivity() {
             Actions("Enviar Localizacion", ""),
             Actions("Establecer hijo", "")
         )
+
         val adapter = ActionsAdapter(lista)
         recyclerViewAction.adapter = adapter
+
     }
 
 }
