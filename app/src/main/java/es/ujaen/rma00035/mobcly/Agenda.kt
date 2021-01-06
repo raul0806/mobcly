@@ -42,6 +42,7 @@ class Agenda : AppCompatActivity() {
                     }
 
                 }
+                tareas.sortBy { t->t.date }
                 recyclerViewTarea.adapter?.notifyDataSetChanged()
             }
 
