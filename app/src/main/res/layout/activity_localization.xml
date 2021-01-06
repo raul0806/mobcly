@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ActivityLocalization">
 
+    <TextView
+        android:id="@+id/localizacionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="230dp"
+        android:text="@string/localizacion_en_proceso"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
