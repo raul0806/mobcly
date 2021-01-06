@@ -42,8 +42,7 @@ class MainActivity : AppCompatActivity() {
     private fun session() {
         val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
         val email = prefs.getString("email", null)
-        val provider = prefs.getString("provider", "None")
-        if (email != null && provider != null) {
+        if (email != null) {
             initLayout.visibility = View.INVISIBLE
             showHome(email)
         }

@@ -32,8 +32,7 @@ class AuthActivity : AppCompatActivity() {
     private fun session() {
         val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
         val email = prefs.getString("email", null)
-        val provider = prefs.getString("provider", "None")
-        if (email != null && provider != null) {
+        if (email != null) {
             authLayout.visibility = View.INVISIBLE
             showHome(email)
         }
