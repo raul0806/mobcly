@@ -26,7 +26,6 @@ import kotlinx.android.synthetic.main.recycler_view_agenda.*
 import java.util.*
 
 class HomeActivity : AppCompatActivity() {
-    private val db = Firebase.database.reference
     private lateinit var tipo: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +46,6 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setup() {
         title = "Inicio"
-        Firebase.database.setPersistenceEnabled(true)
 
         logOutButton.setOnClickListener {
             val prefs =
@@ -85,7 +83,7 @@ class HomeActivity : AppCompatActivity() {
         val lista: List<Actions> = listOf(
             Actions("Agenda", ""),
             Actions("Localizar hijo", ""),
-            Actions("Enviar Localizacion", "")
+            Actions("Enviar localizacion", "")
         )
 
         val adapter = ActionsAdapter(lista)

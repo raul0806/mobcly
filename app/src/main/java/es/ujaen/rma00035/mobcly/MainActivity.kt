@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setup() {
+        Firebase.database.setPersistenceEnabled(true)
         buttonProfilePadre.setOnClickListener {
             val homeIntent = Intent(this, AuthActivity::class.java).apply {
                 //putExtra("clave",valor)
