@@ -13,6 +13,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import es.ujaen.rma00035.mobcly.models.MyLocation
 
 class ActivityLocalization : AppCompatActivity(), LocationListener {
     private lateinit var locationManager: LocationManager
@@ -23,7 +24,8 @@ class ActivityLocalization : AppCompatActivity(), LocationListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_localization)
         val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        email = prefs.getString("email", "none")
+        email = prefs.getString("email", null)
+        getLocation()
     }
 
     private fun getLocation() {
@@ -43,8 +45,9 @@ class ActivityLocalization : AppCompatActivity(), LocationListener {
     }
 
     override fun onLocationChanged(location: Location) {
+        val loc=MyLocation(location.latitude,location.longitude)
         email?.replace(".", ",")
-            ?.let { db.child(it).child("LocalizacionHijo").setValue(location) }
+            ?.let { db.child(it).child("LocalizacionHijo").setValue(loc) }
         //tvGpsLocation.text = "Latitude: " + location.latitude + " , Longitude: " + location.longitude
     }
 

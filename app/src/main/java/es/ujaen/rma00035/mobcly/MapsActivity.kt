@@ -1,11 +1,9 @@
 package es.ujaen.rma00035.mobcly
 
 import android.content.Context
-import android.location.Location
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -18,8 +16,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
-import es.ujaen.rma00035.mobcly.models.Tareas
-import kotlinx.android.synthetic.main.recycler_view_agenda.*
+import es.ujaen.rma00035.mobcly.models.MyLocation
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -41,7 +38,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
 
-                val post = dataSnapshot.getValue<Location>()
+                val post = dataSnapshot.getValue<MyLocation>()
                 if (post != null) {
                     val place = LatLng(post.latitude, post.longitude)
                     mMap.addMarker(MarkerOptions().position(place).title("Hijo"))
