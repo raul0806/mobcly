@@ -60,7 +60,13 @@ class HomeActivity : AppCompatActivity() {
         val prefs =
             getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
         val email = prefs.getString("email", null)
+        val lista:List<Actions>
         if (tipo == "padre") {
+            lista = listOf(
+                Actions("Agenda", ""),
+                Actions("Localizar hijo", ""),
+                Actions("Enviar localizacion", "")
+            )
             addHijo.setOnClickListener {
 
                 val qrEncoder = QRGEncoder("email:$email", null, QRGContents.Type.TEXT, 500)
@@ -76,15 +82,15 @@ class HomeActivity : AppCompatActivity() {
             }
            // email?.let { db.child(it).child("solicitarLocalizacion").setValue("False") }
         }else{
-            addHijo.visibility= View.INVISIBLE
+            lista = listOf(
+                Actions("Agenda", ""),
+                //Actions("Localizar hijo", ""),
+                Actions("Enviar localizacion", "")
+            )
+            addHijo.hide()
           //  email?.let { db.child(it).child("enviarLocalizacion").addOn }
         }
         recyclerViewAction.layoutManager = LinearLayoutManager(this)
-        val lista: List<Actions> = listOf(
-            Actions("Agenda", ""),
-            Actions("Localizar hijo", ""),
-            Actions("Enviar localizacion", "")
-        )
 
         val adapter = ActionsAdapter(lista)
         recyclerViewAction.adapter = adapter
