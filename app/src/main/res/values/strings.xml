@@ -17,4 +17,6 @@
     <string name="guardar">Guardar</string>
     <string name="title_activity_location">LocationActivity</string>
     <string name="title_activity_maps">Map</string>
+    <string name="fcm_message">Localizacion</string>
+    <string name="default_notification_channel_id">5</string>
 </resources>
