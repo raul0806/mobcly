@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.Window
 import android.widget.ImageView
 import androidmads.library.qrgenearator.QRGContents
@@ -76,15 +77,15 @@ class HomeActivity : AppCompatActivity() {
 
             }
            // email?.let { db.child(it).child("solicitarLocalizacion").setValue("False") }
-        }        else{
+        }else{
+            addHijo.visibility= View.INVISIBLE
           //  email?.let { db.child(it).child("enviarLocalizacion").addOn }
         }
         recyclerViewAction.layoutManager = LinearLayoutManager(this)
         val lista: List<Actions> = listOf(
             Actions("Agenda", ""),
             Actions("Localizar hijo", ""),
-            Actions("Enviar Localizacion", ""),
-            Actions("Establecer hijo", "")
+            Actions("Enviar Localizacion", "")
         )
 
         val adapter = ActionsAdapter(lista)

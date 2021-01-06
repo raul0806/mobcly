@@ -1,5 +1,7 @@
 package es.ujaen.rma00035.mobcly
 
+import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
@@ -7,12 +9,17 @@ import android.location.LocationManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.ImageView
 import android.widget.Toast
+import androidmads.library.qrgenearator.QRGContents
+import androidmads.library.qrgenearator.QRGEncoder
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import es.ujaen.rma00035.mobcly.models.Actions
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.recycler_view_itemagenda.view.*
 import java.util.jar.Manifest
 
@@ -51,29 +58,18 @@ class ActionsAdapter(val tareaLista: List<Actions>) :
                         view.context.startActivity(i)
                     }
                     "Localizar hijo" -> {
-                        val i = Intent(view.context, ActivityLocalization::class.java).apply {
+                        val i = Intent(view.context, MapsActivity::class.java).apply {
                             //putExtra("clave",valor)
                         }
                         view.context.startActivity(i)
                     }
                     "Enviar localizacion" -> {
-                        /* TODO
-                        val i = Intent(view.context, AddTarea::class.java).apply {
+                        val i = Intent(view.context, ActivityLocalization::class.java).apply {
                             //putExtra("clave",valor)
                         }
                         view.context.startActivity(i)
-
-                         */
                     }
-                    "Establecer hijo" -> {
-                        /* TODO
-                        val i = Intent(view.context, AddTarea::class.java).apply {
-                            //putExtra("clave",valor)
-                        }
-                        view.context.startActivity(i)
 
-                         */
-                    }
                 }
             }
             //view.imageView=
