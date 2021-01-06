@@ -22,6 +22,8 @@ import java.util.Date
 class Agenda : AppCompatActivity() {
     private val db = Firebase.database.reference
     private lateinit var tareas: MutableList<Tareas>
+    private var email: String? = null
+    private var tipo: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agenda)
@@ -31,6 +33,10 @@ class Agenda : AppCompatActivity() {
     }
 
     fun setup() {
+        val prefs =
+            getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+        email = prefs.getString("email", null)
+        tipo = prefs.getString("tipo", "hijo")
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
@@ -42,7 +48,7 @@ class Agenda : AppCompatActivity() {
                     }
 
                 }
-                tareas.sortBy { t->t.date }
+                tareas.sortBy { t -> t.date }
                 recyclerViewTarea.adapter?.notifyDataSetChanged()
             }
 
@@ -53,9 +59,6 @@ class Agenda : AppCompatActivity() {
             }
         }
 
-        val prefs =
-            getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        val email = prefs.getString("email", null)
         email?.replace(".", ",")
             ?.let { db.child(it).child("Agenda").addValueEventListener(postListener) }
         recyclerViewTarea.layoutManager = LinearLayoutManager(this)
@@ -69,12 +72,16 @@ class Agenda : AppCompatActivity() {
         }*/
         val adapter = TareaAdapter(tareas)
         recyclerViewTarea.adapter = adapter
-        addTarea.setOnClickListener {
-            val i = Intent(this, AddTarea::class.java).apply {
-                //putExtra("clave",valor)
-            }
-            startActivity(i)
+        if (tipo == "padre"){
+            addTarea.setOnClickListener {
+                val i = Intent(this, AddTarea::class.java).apply {
+                    //putExtra("clave",valor)
+                }
+                startActivity(i)
 
+            }
+    }else {
+            addTarea.hide()
         }
     }
 
