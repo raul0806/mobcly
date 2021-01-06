@@ -53,14 +53,18 @@ class HomeActivity : AppCompatActivity() {
             prefs.clear()
             prefs.apply()
             FirebaseAuth.getInstance().signOut()
-            val authIntent = Intent(this, AuthActivity::class.java)
+            val authIntent: Intent
+            if (tipo == "padre")
+                authIntent = Intent(this, AuthActivity::class.java)
+            else
+                authIntent = Intent(this, MainActivity::class.java)
             authIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(authIntent)
         }
         val prefs =
             getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
         val email = prefs.getString("email", null)
-        val lista:List<Actions>
+        val lista: List<Actions>
         if (tipo == "padre") {
             lista = listOf(
                 Actions("Agenda", ""),
@@ -80,15 +84,15 @@ class HomeActivity : AppCompatActivity() {
                 dialog.show()
 
             }
-           // email?.let { db.child(it).child("solicitarLocalizacion").setValue("False") }
-        }else{
+            // email?.let { db.child(it).child("solicitarLocalizacion").setValue("False") }
+        } else {
             lista = listOf(
                 Actions("Agenda", ""),
                 //Actions("Localizar hijo", ""),
                 Actions("Enviar localizacion", "")
             )
             addHijo.hide()
-          //  email?.let { db.child(it).child("enviarLocalizacion").addOn }
+            //  email?.let { db.child(it).child("enviarLocalizacion").addOn }
         }
         recyclerViewAction.layoutManager = LinearLayoutManager(this)
 
