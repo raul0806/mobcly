@@ -69,7 +69,7 @@ class Agenda : AppCompatActivity() {
         if (email != null) {
             db.child(email.replace(".",",")).child("Agenda").setValue(tareas)
         }*/
-        val adapter = TareaAdapter(tareas)
+        val adapter = TareaAdapter(tareas,recyclerViewTarea)
         recyclerViewTarea.adapter = adapter
         val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(adapter))
         itemTouchHelper.attachToRecyclerView(recyclerViewTarea)
