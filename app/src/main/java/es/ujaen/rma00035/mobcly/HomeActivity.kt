@@ -27,11 +27,12 @@ import java.util.*
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var tipo: String
+    private var email:String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         val bundle = intent.extras
-        val email = bundle?.getString("email")
+        email = bundle?.getString("email")
         tipo = bundle?.getString("tipo") ?: "padre"
         setup()
         // Guardado de datos
@@ -61,9 +62,7 @@ class HomeActivity : AppCompatActivity() {
             authIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(authIntent)
         }
-        val prefs =
-            getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        val email = prefs.getString("email", null)
+
         val lista: List<Actions>
         if (tipo == "padre") {
             lista = listOf(
