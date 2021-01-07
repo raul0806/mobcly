@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -16,7 +16,6 @@ import com.google.firebase.ktx.Firebase
 import es.ujaen.rma00035.mobcly.models.Tareas
 import kotlinx.android.synthetic.main.activity_agenda.*
 import kotlinx.android.synthetic.main.recycler_view_agenda.*
-import java.util.Date
 
 
 class Agenda : AppCompatActivity() {
@@ -72,6 +71,8 @@ class Agenda : AppCompatActivity() {
         }*/
         val adapter = TareaAdapter(tareas)
         recyclerViewTarea.adapter = adapter
+        val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(adapter))
+        itemTouchHelper.attachToRecyclerView(recyclerViewTarea)
         if (tipo == "padre"){
             addTarea.setOnClickListener {
                 val i = Intent(this, AddTarea::class.java).apply {
