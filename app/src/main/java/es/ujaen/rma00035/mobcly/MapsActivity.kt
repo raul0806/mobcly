@@ -42,7 +42,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 if (post != null) {
                     val place = LatLng(post.latitude, post.longitude)
                     mMap.addMarker(MarkerOptions().position(place).title("Hijo"))
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(place))
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(place,11f))
                 }
 
             }
