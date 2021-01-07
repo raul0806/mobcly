@@ -2,6 +2,7 @@ package es.ujaen.rma00035.mobcly
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Message
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -16,7 +17,11 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.Constants.MessagePayloadKeys.SENDER_ID
+import com.google.firebase.messaging.ktx.messaging
+import com.google.firebase.messaging.ktx.remoteMessage
 import es.ujaen.rma00035.mobcly.models.MyLocation
+
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -29,7 +34,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
         email = prefs.getString("email", "none")
         email?.replace(".", ",")
-            ?.let { db.child(it).child("PedirLocalizacion").setValue(true) }
+            ?.let { db.child("localizacion").child(it).setValue(true) }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment

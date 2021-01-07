@@ -37,22 +37,29 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d(TAG, "From: ${remoteMessage.from}")
 
+        val prefs =
+            getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+        //val email = prefs.getString("email", null)
+        val tipo = prefs.getString("tipo", "hijo")
+
         // Check if message contains a data payload.
         if (remoteMessage.data.isNotEmpty()) {
             Log.d(TAG, "Message data payload: ${remoteMessage.data}")
-
-            if (/* Check if data needs to be processed by long running job */ true) {
-                // For long-running tasks (10 seconds or more) use WorkManager.
-                ///TODO scheduleJob()
-            } else {
-                // Handle message within 10 seconds
-                handleNow()
+            val i:Intent
+            if(tipo=="padre") {
+                i = Intent(this, MapsActivity::class.java)
             }
+            else{
+                i=  Intent(this, ActivityLocalization::class.java)
+            }
+            i.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(i)
         }
 
         // Check if message contains a notification payload.
         remoteMessage.notification?.let {
             Log.d(TAG, "Message Notification Body: ${it.body}")
+            it.body?.let { it1 -> sendNotification(it1) }
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
@@ -61,21 +68,27 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     // [END receive_message]
 
     // [START on_new_token]
-    /**
+  /*  /**
      * Called if the FCM registration token is updated. This may occur if the security of
      * the previous token had been compromised. Note that this is called when the
      * FCM registration token is initially generated so this is where you would retrieve the token.
      */
     override fun onNewToken(token: String) {
         Log.d(TAG, "Refreshed token: $token")
+        val prefs =
+            getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+        val email = prefs.getString("email", null)
+        //tipo = prefs.getString("tipo", "hijo")
 
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
         // FCM registration token to your app server.
-        sendRegistrationToServer(token)
+        sendRegistrationToServer(email)
     }
     // [END on_new_token]
+*
 /*
+   */
     /**
      * Schedule async work using WorkManager.
      */
