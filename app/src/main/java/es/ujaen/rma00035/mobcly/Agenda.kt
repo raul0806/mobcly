@@ -2,8 +2,10 @@ package es.ujaen.rma00035.mobcly
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +18,7 @@ import com.google.firebase.ktx.Firebase
 import es.ujaen.rma00035.mobcly.models.Tareas
 import kotlinx.android.synthetic.main.activity_agenda.*
 import kotlinx.android.synthetic.main.recycler_view_agenda.*
+import java.util.*
 
 
 class Agenda : AppCompatActivity() {
@@ -86,15 +89,13 @@ class Agenda : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onDestroy() {
         super.onDestroy()
-        /*tareas.removeIf{
-            it.date?.before(Date(System.currentTimeMillis()-3600000)) == true
+        val date=Date(System.currentTimeMillis()-(3600000*5))
+        tareas.removeIf{
+            it.date?.before(date) == true
         }
-        */
-        val prefs =
-            getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        val email = prefs.getString("email", null)
         email?.let { db.child(it.replace(".", ",")).child("Agenda").setValue(tareas) }
     }
 
