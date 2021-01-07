@@ -12,10 +12,10 @@ android {
 
     defaultConfig {
         applicationId "es.ujaen.rma00035.mobcly"
-        minSdkVersion 22
+        minSdkVersion 29
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName "0.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

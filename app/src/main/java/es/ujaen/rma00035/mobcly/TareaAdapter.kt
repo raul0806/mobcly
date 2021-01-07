@@ -10,15 +10,14 @@ import kotlinx.android.synthetic.main.recycler_view_itemagenda.view.*
 import java.text.SimpleDateFormat
 
 
-class TareaAdapter(val tareaLista: MutableList<Tareas>) :
+class TareaAdapter(val tareaLista: MutableList<Tareas>,val view: RecyclerView) :
     RecyclerView.Adapter<TareaAdapter.TareaHolder>() {
     private lateinit var ultimaTarea: Tareas
     private var ultimaPosicion = 0
-    private lateinit var view: View
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TareaHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        view = layoutInflater.inflate(R.layout.recycler_view_itemagenda, parent, false)
+       val view = layoutInflater.inflate(R.layout.recycler_view_itemagenda, parent, false)
         return TareaHolder(view)
     }
 
@@ -39,6 +38,7 @@ class TareaAdapter(val tareaLista: MutableList<Tareas>) :
 
     private fun showUndoSnackbar() {
         //R.layout.activity_agenda.
+
         val snackbar = Snackbar.make(view, R.string.snack_bar_text,Snackbar.LENGTH_LONG        )
         snackbar.setAction(R.string.snack_bar_undo) { undoDelete() }
         snackbar.show()
