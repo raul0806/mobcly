@@ -1,40 +1,25 @@
 package es.ujaen.rma00035.mobcly
 
-import android.app.Dialog
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.widget.ImageView
-import android.widget.Toast
-import androidmads.library.qrgenearator.QRGContents
-import androidmads.library.qrgenearator.QRGEncoder
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.recyclerview.widget.RecyclerView
 import es.ujaen.rma00035.mobcly.models.Actions
-import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.recycler_view_itemagenda.view.*
-import java.util.jar.Manifest
+import kotlinx.android.synthetic.main.recycler_view_itemactions.view.*
 
 class ActionsAdapter(val tareaLista: List<Actions>) :
-    RecyclerView.Adapter<ActionsAdapter.ActionHolder>() {
-    private lateinit var locationManager: LocationManager
+        RecyclerView.Adapter<ActionsAdapter.ActionHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActionHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return ActionHolder(
-            layoutInflater.inflate(
-                R.layout.recycler_view_itemactions,
-                parent,
-                false
-            )
+                layoutInflater.inflate(
+                        R.layout.recycler_view_itemactions,
+                        parent,
+                        false
+                )
         )
     }
 
@@ -47,8 +32,9 @@ class ActionsAdapter(val tareaLista: List<Actions>) :
 
     class ActionHolder(val view: View) : RecyclerView.ViewHolder(view) {
         fun render(t: Actions) {
-
-            view.nameTextView.text = t.name
+            if (t.imagePath != -1)
+                view.imageViewAction.setImageDrawable(getDrawable(view.context, t.imagePath))
+            view.nameTextViewAction.text = t.name
             view.setOnClickListener {
                 when (t.name) {
                     "Agenda" -> {

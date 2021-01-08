@@ -3,27 +3,18 @@ package es.ujaen.rma00035.mobcly
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.view.Window
 import android.widget.ImageView
 import androidmads.library.qrgenearator.QRGContents
 import androidmads.library.qrgenearator.QRGEncoder
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ktx.FirebaseDatabaseKtxRegistrar
-import com.google.firebase.database.ktx.database
-import com.google.firebase.iid.FirebaseInstanceId
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import es.ujaen.rma00035.mobcly.models.Actions
-import es.ujaen.rma00035.mobcly.models.Tareas
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.recycler_view_actions.*
-import kotlinx.android.synthetic.main.recycler_view_agenda.*
-import java.util.*
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var tipo: String
@@ -66,9 +57,9 @@ class HomeActivity : AppCompatActivity() {
         val lista: List<Actions>
         if (tipo == "padre") {
             lista = listOf(
-                Actions("Agenda", ""),
-                Actions("Localizar hijo", ""),
-                Actions("Enviar localizacion", "")
+                Actions("Agenda", R.drawable.agenda),
+                Actions("Localizar hijo", R.drawable.mapa),
+                Actions("Enviar localizacion", R.drawable.mapa)
             )
             addHijo.setOnClickListener {
 
@@ -86,9 +77,9 @@ class HomeActivity : AppCompatActivity() {
             // email?.let { db.child(it).child("solicitarLocalizacion").setValue("False") }
         } else {
             lista = listOf(
-                Actions("Agenda", ""),
+                Actions("Agenda", R.drawable.agenda),
                 //Actions("Localizar hijo", ""),
-                Actions("Enviar localizacion", "")
+                Actions("Enviar localizacion", R.drawable.mapa)
             )
             addHijo.hide()
             //  email?.let { db.child(it).child("enviarLocalizacion").addOn }

@@ -3,11 +3,11 @@ package es.ujaen.rma00035.mobcly
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.format.DateFormat.is24HourFormat
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.crashlytics.internal.common.CommonUtils.hideKeyboard
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -36,21 +36,21 @@ class AddTarea : AppCompatActivity() {
         }
         buttonSave.setOnClickListener {
             if ((editTextTitle.text.isNotEmpty()) and (dateInput.text != getString(R.string.fecha)) and (timeInput.text != getString(
-                    R.string.hora
-                ))
+                            R.string.hora
+                    ))
             ) {
                 val cal = Calendar.getInstance()
                 cal.set(anio, mes, dia, hora, minuto)
-                val tarea = Tareas(editTextTitle.text.toString(), "", cal.time)
+                val tarea = Tareas(editTextTitle.text.toString(), -1, cal.time)
                 val prefs =
-                    getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
+                        getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
                 val email = prefs.getString("email", "none")
                 val key =
-                    email?.let { it1 -> db.child(it1.replace(".", ",")).child("Agenda").push().key }
+                        email?.let { it1 -> db.child(it1.replace(".", ",")).child("Agenda").push().key }
                 email?.let { it1 ->
                     key?.let { it2 ->
                         db.child(it1.replace(".", ",")).child("Agenda").child(
-                            it2
+                                it2
                         ).setValue(tarea)
                     }
                 }
@@ -62,19 +62,19 @@ class AddTarea : AppCompatActivity() {
     fun citahora(view: View) {
         hideKeyboard(this, view)
         val time_picker = TimePickerDialog(
-            this,
-            { _, h, m ->
-                hora = h
-                minuto = m
-                Log.d(LOG_TAG, "OnTimeSetListener $h:$m")
-                timeInput.setText("$hora:$minuto")
-                if (dateInput.text == getString(R.string.fecha)) {
-                    citadia(view)
-                }
-            },
-            hora,
-            minuto,
-            is24HourFormat(this)
+                this,
+                { _, h, m ->
+                    hora = h
+                    minuto = m
+                    Log.d(LOG_TAG, "OnTimeSetListener $h:$m")
+                    timeInput.setText("$hora:$minuto")
+                    if (dateInput.text == getString(R.string.fecha)) {
+                        citadia(view)
+                    }
+                },
+                hora,
+                minuto,
+                is24HourFormat(this)
         )
         time_picker.setCancelable(false)
         time_picker.show()
@@ -85,20 +85,20 @@ class AddTarea : AppCompatActivity() {
 
         Log.d(LOG_TAG, "$dia de $mes de $anio")
         val date_picker = DatePickerDialog(
-            this,
-            { _, y, m, d ->
-                anio = y
-                mes = m + 1
-                dia = d
-                Log.d(LOG_TAG, "OnDateSetListener $dia/$mes/$anio")
-                dateInput.setText("$dia/$mes/$anio")
-                if (timeInput.text == getString(R.string.hora)) {
-                    citahora(view)
-                }
-            },
-            anio,
-            mes,
-            dia
+                this,
+                { _, y, m, d ->
+                    anio = y
+                    mes = m + 1
+                    dia = d
+                    Log.d(LOG_TAG, "OnDateSetListener $dia/$mes/$anio")
+                    dateInput.setText("$dia/$mes/$anio")
+                    if (timeInput.text == getString(R.string.hora)) {
+                        citahora(view)
+                    }
+                },
+                anio,
+                mes,
+                dia
         )
         date_picker.setCancelable(false)
         date_picker.show()
