@@ -24,8 +24,7 @@
         android:layout_margin="16dp"
         android:text="@string/cerrar_sesion"
         android:textColorLink="#FFFFFF"
-        app:backgroundTint="#E4E41C1C"
-        app:srcCompat="@android:drawable/btn_dialog" />
+        app:backgroundTint="#E4E41C1C"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
