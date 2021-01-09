@@ -27,4 +27,6 @@
     <string name="escanea_el_codigo_qr_para_configurar_tu_hijo_camara_encendida">Escanea el codigo Qr para configurar tu hijo. Camara encendida</string>
     <string name="snack_bar_undo">Deshacer el borrado</string>
     <string name="snack_bar_text">Deshacer</string>
+    <string name="vincular_hijo">Vincular hijo</string>
+    <string name="cerrar_sesion">Cerrar sesion</string>
 </resources>

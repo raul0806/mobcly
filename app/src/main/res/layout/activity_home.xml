@@ -8,20 +8,23 @@
 
     <include layout="@layout/recycler_view_actions" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/addHijo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        android:text="@string/vincular_hijo" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/logOutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
         android:layout_margin="16dp"
+        android:text="@string/cerrar_sesion"
+        android:textColorLink="#FFFFFF"
+        app:backgroundTint="#E4E41C1C"
         app:srcCompat="@android:drawable/btn_dialog" />
 
 
