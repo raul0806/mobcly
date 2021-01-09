@@ -59,7 +59,7 @@ class HomeActivity : AppCompatActivity() {
             lista = listOf(
                 Actions("Agenda", R.drawable.agenda),
                 Actions("Localizar hijo", R.drawable.mapa),
-                Actions("Enviar localizacion", R.drawable.mapa)
+                //Actions("Enviar localizacion", R.drawable.mapa)
             )
             addHijo.setOnClickListener {
 
@@ -78,7 +78,7 @@ class HomeActivity : AppCompatActivity() {
         } else {
             lista = listOf(
                 Actions("Agenda", R.drawable.agenda),
-                //Actions("Localizar hijo", ""),
+                //Actions("Localizar hijo", R.drawable.mapa),
                 Actions("Enviar localizacion", R.drawable.mapa)
             )
             addHijo.hide()
