@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.recycler_view_itemagenda.view.*
 import java.text.SimpleDateFormat
 
 
-class TareaAdapter(val tareaLista: MutableList<Tareas>, val view: RecyclerView) :
+class TareaAdapter(private val tareaLista: MutableList<Tareas>, private val view: RecyclerView) :
         RecyclerView.Adapter<TareaAdapter.TareaHolder>() {
     private lateinit var ultimaTarea: Tareas
     private var ultimaPosicion = 0
@@ -30,7 +30,7 @@ class TareaAdapter(val tareaLista: MutableList<Tareas>, val view: RecyclerView) 
 
 
     fun deleteItem(position: Int) {
-        ultimaTarea = tareaLista.get(position)
+        ultimaTarea = tareaLista[position]
         ultimaPosicion = position
         tareaLista.removeAt(position)
         notifyItemRemoved(position)
@@ -49,7 +49,7 @@ class TareaAdapter(val tareaLista: MutableList<Tareas>, val view: RecyclerView) 
         notifyItemInserted(ultimaPosicion)
     }
 
-    class TareaHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    class TareaHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         fun render(t: Tareas) {
             view.hourTextView.text = SimpleDateFormat("HH:mm").format(t.date)
             view.nameTextViewTarea.text = t.name

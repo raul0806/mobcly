@@ -25,7 +25,8 @@
             android:ems="10"
             android:hint="@string/nombre"
             android:inputType="text"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:importantForAutofill="no" />
 
 
         <HorizontalScrollView

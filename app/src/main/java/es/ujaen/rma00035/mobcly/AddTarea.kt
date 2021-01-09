@@ -17,13 +17,13 @@ import java.util.*
 
 class AddTarea : AppCompatActivity() {
     private val db = Firebase.database.reference
-    val LOG_TAG = "AddTarea CLASS"
-    var dia = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-    var mes = Calendar.getInstance().get(Calendar.MONTH) // OJO: De 0 a 11
-    var anio = Calendar.getInstance().get(Calendar.YEAR)
-    var hora = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
-    var minuto = Calendar.getInstance().get(Calendar.MINUTE)
-    var presionada :Int =-1
+    private val LOG_TAG = "AddTarea CLASS"
+    private var dia = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+    private var mes = Calendar.getInstance().get(Calendar.MONTH) // OJO: De 0 a 11
+    private var anio = Calendar.getInstance().get(Calendar.YEAR)
+    private var hora = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+    private var minuto = Calendar.getInstance().get(Calendar.MINUTE)
+    private var presionada :Int =-1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_tarea)
@@ -75,7 +75,7 @@ class AddTarea : AppCompatActivity() {
                     hora = h
                     minuto = m
                     Log.d(LOG_TAG, "OnTimeSetListener $h:$m")
-                    timeInput.setText("$hora:$minuto")
+                    timeInput.text = "$hora:$minuto"
                     if (dateInput.text == getString(R.string.fecha)) {
                         citadia(view)
                     }
@@ -99,7 +99,7 @@ class AddTarea : AppCompatActivity() {
                     mes = m + 1
                     dia = d
                     Log.d(LOG_TAG, "OnDateSetListener $dia/$mes/$anio")
-                    dateInput.setText("$dia/$mes/$anio")
+                    dateInput.text = "$dia/$mes/$anio"
                     if (timeInput.text == getString(R.string.hora)) {
                         citahora(view)
                     }

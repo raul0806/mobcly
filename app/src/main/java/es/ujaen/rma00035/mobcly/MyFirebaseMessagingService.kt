@@ -3,12 +3,10 @@ package es.ujaen.rma00035.mobcly
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
-import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -46,11 +44,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         if (remoteMessage.data.isNotEmpty()) {
             Log.d(TAG, "Message data payload: ${remoteMessage.data}")
             val i:Intent
-            if(tipo=="padre") {
-                i = Intent(this, MapsActivity::class.java)
-            }
-            else{
-                i=  Intent(this, ActivityLocalization::class.java)
+            i = if(tipo=="padre") {
+                Intent(this, MapsActivity::class.java)
+            } else{
+                Intent(this, ActivityLocalization::class.java)
             }
             i.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(i)

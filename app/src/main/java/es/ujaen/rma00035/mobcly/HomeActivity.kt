@@ -46,10 +46,10 @@ class HomeActivity : AppCompatActivity() {
             prefs.apply()
             FirebaseAuth.getInstance().signOut()
             val authIntent: Intent
-            if (tipo == "padre")
-                authIntent = Intent(this, AuthActivity::class.java)
+            authIntent = if (tipo == "padre")
+                Intent(this, AuthActivity::class.java)
             else
-                authIntent = Intent(this, MainActivity::class.java)
+                Intent(this, MainActivity::class.java)
             authIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(authIntent)
         }

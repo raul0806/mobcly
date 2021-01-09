@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import es.ujaen.rma00035.mobcly.models.Actions
 import kotlinx.android.synthetic.main.recycler_view_itemactions.view.*
 
-class ActionsAdapter(val tareaLista: List<Actions>) :
+class ActionsAdapter(private val tareaLista: List<Actions>) :
         RecyclerView.Adapter<ActionsAdapter.ActionHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActionHolder {
@@ -30,7 +30,7 @@ class ActionsAdapter(val tareaLista: List<Actions>) :
     override fun getItemCount(): Int = tareaLista.size
 
 
-    class ActionHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    class ActionHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         fun render(t: Actions) {
             if (t.imagePath != -1)
                 view.imageViewAction.setImageDrawable(getDrawable(view.context, t.imagePath))

@@ -2,10 +2,8 @@ package es.ujaen.rma00035.mobcly
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,7 +32,7 @@ class Agenda : AppCompatActivity() {
 
     }
 
-    fun setup() {
+    private fun setup() {
         val prefs =
             getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
         email = prefs.getString("email", null)
@@ -89,7 +87,6 @@ class Agenda : AppCompatActivity() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onDestroy() {
         super.onDestroy()
         val date=Date(System.currentTimeMillis()-(3600000*5))
