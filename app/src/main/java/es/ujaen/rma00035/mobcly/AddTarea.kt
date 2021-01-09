@@ -23,6 +23,7 @@ class AddTarea : AppCompatActivity() {
     var anio = Calendar.getInstance().get(Calendar.YEAR)
     var hora = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
     var minuto = Calendar.getInstance().get(Calendar.MINUTE)
+    var presionada :Int =-1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_tarea)
@@ -41,7 +42,7 @@ class AddTarea : AppCompatActivity() {
             ) {
                 val cal = Calendar.getInstance()
                 cal.set(anio, mes, dia, hora, minuto)
-                val tarea = Tareas(editTextTitle.text.toString(), -1, cal.time)
+                val tarea = Tareas(editTextTitle.text.toString(), presionada, cal.time)
                 val prefs =
                         getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
                 val email = prefs.getString("email", "none")
@@ -57,6 +58,13 @@ class AddTarea : AppCompatActivity() {
                 onBackPressed()
             }
         }
+        imageViewComer.setOnClickListener{presionada=R.drawable.comer}
+        imageViewNinguna.setOnClickListener{presionada=R.drawable.ninguna}
+        imageViewDormir.setOnClickListener{presionada=R.drawable.dormir}
+        imageViewIrCasa.setOnClickListener{presionada=R.drawable.ircasa}
+        imageViewIrCole.setOnClickListener{presionada=R.drawable.ircole}
+        imageViewHacerDeberes.setOnClickListener{presionada=R.drawable.hacerdeberes}
+
     }
 
     fun citahora(view: View) {

@@ -20,7 +20,7 @@
         <EditText
             android:id="@+id/editTextTitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:layout_weight="1"
             android:ems="10"
             android:hint="@string/nombre"
@@ -41,7 +41,7 @@
 
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/imageViewNinguna"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -49,7 +49,7 @@
                     app:srcCompat="@drawable/ninguna" />
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/imageViewComer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -57,7 +57,15 @@
                     app:srcCompat="@drawable/comer" />
 
                 <ImageView
-                    android:id="@+id/imageView6"
+                    android:id="@+id/imageViewIrCole"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    app:srcCompat="@drawable/ircole" />
+
+                <ImageView
+                    android:id="@+id/imageViewIrCasa"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -67,15 +75,7 @@
                     app:srcCompat="@drawable/ircasa" />
 
                 <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:adjustViewBounds="true"
-                    app:srcCompat="@drawable/ircole" />
-
-                <ImageView
-                    android:id="@+id/imageView5"
+                    android:id="@+id/imageViewHacerDeberes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -83,7 +83,7 @@
                     app:srcCompat="@drawable/hacerdeberes" />
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/imageViewDormir"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -102,7 +102,7 @@
             <TextView
                 android:id="@+id/dateInput"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="true"
@@ -114,7 +114,7 @@
             <TextView
                 android:id="@+id/timeInput"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="true"

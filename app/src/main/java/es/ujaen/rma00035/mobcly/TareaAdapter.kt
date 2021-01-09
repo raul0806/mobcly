@@ -38,7 +38,6 @@ class TareaAdapter(val tareaLista: MutableList<Tareas>, val view: RecyclerView) 
     }
 
     private fun showUndoSnackbar() {
-        //R.layout.activity_agenda.
 
         val snackbar = Snackbar.make(view, R.string.snack_bar_text, Snackbar.LENGTH_LONG)
         snackbar.setAction(R.string.snack_bar_undo) { undoDelete() }
@@ -54,7 +53,7 @@ class TareaAdapter(val tareaLista: MutableList<Tareas>, val view: RecyclerView) 
         fun render(t: Tareas) {
             view.hourTextView.text = SimpleDateFormat("HH:mm").format(t.date)
             view.nameTextViewTarea.text = t.name
-            if (t.imagePath != -1)
+            if ((t.imagePath != -1)and (t.imagePath!=R.drawable.ninguna))
                 view.imageViewTarea.setImageDrawable(getDrawable(view.context,t.imagePath))
         }
     }
