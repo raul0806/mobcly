@@ -132,11 +132,6 @@ class QrReader : AppCompatActivity() {
                         // [START_EXCLUDE]
                         // [START get_barcodes]
                         for (barcode in barcodes) {
-                            val bounds = barcode.boundingBox
-                            val corners = barcode.cornerPoints
-
-                            val rawValue = barcode.rawValue
-
                             val valueType = barcode.valueType
                             // See API reference for complete list of supported types
                             when (valueType) {
